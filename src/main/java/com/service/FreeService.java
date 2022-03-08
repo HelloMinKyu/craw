@@ -16,4 +16,10 @@ public class FreeService {
     public Free save(Free free) {
         return freeRepository.save(free);
     }
+
+    /* 중복 데이터 */
+    public Free find(String writedate) {
+        Free findwritedate = freeRepository.findByWritedate(writedate);
+        return findwritedate;
+    }
 }

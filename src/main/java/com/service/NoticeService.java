@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NoticeService {
@@ -22,8 +23,16 @@ public class NoticeService {
 
     @Transactional
     public Notice save(Notice notice) {
+        //validateDuplicateNoce(notice);
         return noticeRepository.save(notice);
     }
+
+    /* 중복 데이터 */
+    public Notice find(String writedate) {
+        Notice findWritedate = noticeRepository.findByWritedate(writedate);
+        return findWritedate;
+    }
+
     @Transactional
     public Page<Notice> getPages(int page, int showNum, SimpleSearchRequest request) { //페이징처리
 
