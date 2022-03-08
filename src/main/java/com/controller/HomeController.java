@@ -152,6 +152,7 @@ public class HomeController {
                 final String content = contentElement.text();
 
                 if(freeService.find(writedate) != null) {
+                    System.out.println(freeService.find(writedate));
                     System.out.println("중복있음");
                 } else {
                     free.setTitle(title);
@@ -302,4 +303,33 @@ public class HomeController {
         model.addAttribute("pathParam","?" + searchReq.toPathParam());
         return "list";
     }
+
+    @RequestMapping("/API/noticeList/{page}")
+    @ResponseBody
+    public ResponseEntity<Object> noticeList(@PathVariable int page){
+        List<Notice> pages = noticeService.getPages(page,100,new SimpleSearchRequest()).getContent();
+        return new ResponseEntity<>(pages,HttpStatus.OK);
+    }
+
+    @RequestMapping("/API/freeList/{page}")
+    @ResponseBody
+    public ResponseEntity<Object> freeList(@PathVariable int page){
+        List<Free> pages = freeService.getPages(page,100,new SimpleSearchRequest()).getContent();
+        return new ResponseEntity<>(pages,HttpStatus.OK);
+    }
+
+    @RequestMapping("/API/cityList/{page}")
+    @ResponseBody
+    public ResponseEntity<Object> cityList(@PathVariable int page){
+        List<Citicommittee> pages = citicommitteeService.getPages(page,100,new SimpleSearchRequest()).getContent();
+        return new ResponseEntity<>(pages,HttpStatus.OK);
+    }
+
+    @RequestMapping("/API/eventList/{page}")
+    @ResponseBody
+    public ResponseEntity<Object> eventList(@PathVariable int page){
+        List<Event> pages = eventService.getPages(page,100,new SimpleSearchRequest()).getContent();
+        return new ResponseEntity<>(pages,HttpStatus.OK);
+    }
+
 }
