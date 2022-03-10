@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<h3>가호동 열린마당 공지사항</h3>
+<h3>진주시청 - 가호동</h3>
 <form action="/crawling" method="post">
     <select name="address">
         <option value="none">주소선택</option>
